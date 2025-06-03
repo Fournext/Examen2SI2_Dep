@@ -1,0 +1,12 @@
+<header
+  class=" top-0 left-0 w-full bg-gray-900 text-white px-4 py-3 flex justify-end items-center space-x-4 text-xs sm:text-sm md:text-base font-semibold tracking-wide">
+  <a href="#" class="hover:underline hover:scale-[1.05]">INFORMACION</a>
+  <a href="#" class="hover:underline hover:scale-[1.05]">RECLAMOS</a>
+  @if(!mostrarVolver()){
+  <a [routerLink]="['/login']" routerLinkActive="router-link-active"
+    class="hover:underline hover:scale-[1.05]">INGRESAR</a>
+  }
+  @if(mostrarVolver()){
+  <button (click)="volver()" class="hover:scale-[1.05] hover:underline">VOLVER</button>
+  }
+</header>

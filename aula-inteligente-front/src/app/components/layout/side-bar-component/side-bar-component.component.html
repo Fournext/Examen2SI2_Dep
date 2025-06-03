@@ -1,0 +1,49 @@
+<aside
+  class="hidden h-[calc(100%-0.5rem)] m-1 box-border md:w-60 bg-gray-800 text-center py-6 px-2 shadow-lg md:flex md:flex-col justify-between rounded-lg items-center">
+
+  <!-- Logo -->
+  <div class="w-[150px] h-[150px] border-2 text-white flex items-center justify-center">
+    LOGO
+  </div>
+
+  <!-- Navegación -->
+  <div class="space-y-4 h-[60%] flex flex-col w-full">
+    <a [routerLink]="['/private/administrativo']" routerLinkActive="bg-blue-600 text-red-500 text-lg"
+      class="w-full bg-white text-black py-2 rounded transition hover:scale-[1.05]">
+      ADMINISTRATIVOS
+    </a>
+
+    <a [routerLink]="['/private/profesor']" routerLinkActive="bg-blue-600 text-red-500  text-lg"
+      class="w-full bg-white text-black py-2 rounded transition hover:scale-[1.05]">
+      PROFESORES
+    </a>
+
+    <a [routerLink]="['/private/alumno']" routerLinkActive="bg-blue-600 text-red-500  text-lg"
+      class="w-full bg-white text-black py-2 rounded transition hover:scale-[1.05]">
+      ALUMNOS
+    </a>
+
+    <a [routerLink]="['/private/aula']" routerLinkActive="bg-blue-600 text-red-500  text-lg"
+      class="w-full bg-white text-black py-2 rounded transition hover:scale-[1.05]">
+      AULAS
+    </a>
+
+    <a [routerLink]="['/private/materia']" routerLinkActive="bg-blue-600 text-red-500  text-lg"
+      class="w-full bg-white text-black py-2 rounded transition hover:scale-[1.05]">
+      MATERIAS
+    </a>
+
+    <a [routerLink]="['/private/nivel']" routerLinkActive="bg-blue-600 text-red-500  text-lg"
+      class="w-full bg-white text-black py-2 rounded transition hover:scale-[1.05]">
+      NIVELES
+    </a>
+  </div>
+
+  <!-- Cerrar sesión -->
+  <div class="mt-6 w-full">
+    <button (click)="logout()"
+      class="bg-red-600 text-white py-2 rounded hover:bg-red-500 transition w-full hover:scale-[1.05]">
+      CERRAR SESIÓN
+    </button>
+  </div>
+</aside>

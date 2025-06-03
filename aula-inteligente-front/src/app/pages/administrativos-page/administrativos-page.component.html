@@ -1,0 +1,74 @@
+<style>
+  main,
+  body {
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE y Edge */
+    overflow: auto;
+  }
+
+  div::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari */
+  }
+</style>
+<div class="flex flex-col gap-3 h-full md:max-w-[calc(100vw-240px)] justify-center ">
+  <div class="md:flex md:justify-around  md:max-w-[calc(100vw-240px)] bg-gray-800 px-6 py-4 rounded-lg ">
+    <select name="" id="" class="w-[20%] bg-white border-2 px-2 py-1 rounded-lg">
+      <option value="">Filtros</option>
+      <option value="">Administrativo</option>
+      <option value="">Limpieza</option>
+      <option value="">Seguridad</option>
+    </select>
+    <select name="" id="" (change)="ejecutarAccion($event)" class="w-[20%] bg-white border-2 px-2 py-1 rounded-lg">
+      <option value="accion">Acciones</option>
+      <option value="registrar">Registrar</option>
+      <option value="eliminar">Eliminar</option>
+      <option value="">Reset</option>
+    </select>
+    <input type="text" class="w-[30%] border-2 bg-white rounded-lg ">
+    <button class="w-[20%] border-2 bg-white rounded-lg">
+      Buscar
+    </button>
+  </div>
+  <!-- Contenido -->
+  <div class="relative w-full h-full rounded-lg overflow-hidden">
+    <!-- Difuminado superior -->
+    <div
+      class="pointer-events-none absolute top-0 left-0 w-full h-6 bg-gradient-to-b from-gray-800 to-transparent z-10">
+    </div>
+
+    <!-- Difuminado inferior -->
+    <div
+      class="pointer-events-none absolute bottom-0 left-0 w-full h-6 bg-gradient-to-t from-gray-800 to-transparent z-10">
+    </div>
+
+    <!-- Contenido scrollable -->
+    <main
+      class="overflow-y-scroll h-full bg-gray-800 p-6 grid grid-cols-1 place-items-center md:grid-cols-2 lg:grid-cols-3  xl:grid-cols-5 gap-6 md:place-items-top">
+      <!--Esto se reemplazara por un @for-->
+      <tarjeta-administrativo />
+      <tarjeta-administrativo />
+      <tarjeta-administrativo />
+      <tarjeta-administrativo />
+      <tarjeta-administrativo />
+      <tarjeta-administrativo />
+      <tarjeta-administrativo />
+      <tarjeta-administrativo />
+      <tarjeta-administrativo />
+      <tarjeta-administrativo />
+      <tarjeta-administrativo />
+      <tarjeta-administrativo />
+
+    </main>
+  </div>
+  @if(estadoModalAdministrativoEditar()){
+  <formulario-editar-administrativo />
+  }
+
+  @if(estadoModalAdministrativoRegister()){
+  <formulario-registrar-administrativo />
+  }
+</div>

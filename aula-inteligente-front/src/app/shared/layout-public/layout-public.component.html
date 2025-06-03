@@ -1,0 +1,23 @@
+<style>
+    div,
+    body {
+      scrollbar-width: none;
+      /* Firefox */
+      -ms-overflow-style: none;
+      /* IE y Edge */
+      overflow: auto;
+    }
+
+    div::-webkit-scrollbar,
+    body::-webkit-scrollbar {
+      display: none;
+      /* Chrome, Safari */
+    }
+  </style>
+<div class="h-screen overflow-auto flex flex-col ">
+  <header-component class="sticky top-0 z-50" />
+  <main class="flex-1">
+    <router-outlet/>
+  </main>
+  <footer-component />
+</div>

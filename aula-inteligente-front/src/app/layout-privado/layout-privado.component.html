@@ -1,0 +1,40 @@
+<div class="flex h-screen box-border bg-[#F2F2F2]">
+
+  <!-- Sidebar (ya construido correctamente) -->
+  <side-bar-component></side-bar-component>
+  <!-- Contenedor principal -->
+  <div class="flex flex-col flex-1 overflow-hidden relative">
+    <!-- Header -->
+    <div>
+      <header-componente-private></header-componente-private>
+    </div>
+    <!--para el movil -->
+    <div class="md:hidden absolute  right-1 z-50 bg-[#222831] px-4 py-2 rounded-lg flex flex-col items-end">
+      <button class="mb-1 text-white" (click)="toggleSidebar()"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+          viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
+        </svg>
+      </button>
+      <div class=" flex flex-col gap-1 ">
+        @if (mostrarSidebar) {
+        @for (btn of botones(); track $index) {
+        <a [routerLink]="btn.ruta"
+          class="block w-full  text-white py-2 px-2 rounded  bg-[#393E46] text-center hover:bg-gray-400 transition">
+          {{ btn.texto }}
+        </a>
+        }
+        }
+      </div>
+    </div>
+
+
+    <!-- Main (contenido enrutado) -->
+    <main class="flex-1 overflow-auto sm:mt-1 sm:mb-1 sm:mr-1 rounded-lg">
+      <router-outlet></router-outlet>
+      <!--Aqui vamos a poner los modales-->
+    </main>
+    <!-- Footer -->
+    <footer-component-private></footer-component-private>
+  </div>
+</div>
