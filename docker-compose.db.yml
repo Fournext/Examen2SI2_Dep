@@ -30,7 +30,7 @@ services:
       PGADMIN_DEFAULT_PASSWORD: admin
     volumes:
       - pgadmin_data:/var/lib/pgadmin
-      - ./back_Sistema_Venta_IA_Rec.Voz/rp.sql:/tmp/rp.sql
+      - ./aula-inteligente-back/rp.sql:/tmp/rp.sql
     ports:
       - "5050:80"
     user: "5050:5050"
