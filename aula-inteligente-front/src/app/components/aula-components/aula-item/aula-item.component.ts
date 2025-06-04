@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { ModalsAulaService } from '../../../services/aula/modals-aula.service';
+import { Aula } from '../../../interfaces/aula.interface';
+import { AulaService } from '../../../services/aula/aula.service';
 
 @Component({
   selector: 'aula-item',
@@ -9,12 +11,17 @@ import { ModalsAulaService } from '../../../services/aula/modals-aula.service';
 })
 export class AulaItemComponent {
   private modalAulaService = inject(ModalsAulaService);
+  private aulaService = inject(AulaService)
+
+  aula = input.required<Aula>();
 
   mostrarModal() {
+    this.aulaService.aulaActual.set(this.aula());
     this.modalAulaService.cambiarEstadoEditar();
   }
 
   mostrarModalVer() {
+    this.aulaService.aulaActual.set(this.aula());
     this.modalAulaService.cambiarEstadoVer();
   }
 }

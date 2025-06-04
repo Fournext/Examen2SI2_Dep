@@ -1,0 +1,63 @@
+<!-- Fondo oscuro -->
+<div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4">
+
+  <!-- Contenedor del modal -->
+  <div
+    class="bg-white w-full max-w-2xl rounded-xl shadow-lg p-6 sm:p-8 relative animate-fade-in overflow-y-auto max-h-[90vh]">
+
+    <!-- Botón cerrar -->
+    <button (click)="cerrarModalEditar()"
+      class="absolute top-3 right-3 text-white text-xl font-bold bg-red-500 px-2 py-1 rounded-[5px] hover:bg-red-600 hover:scale-[1.02]">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+        class="size-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <!-- Título -->
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Editar Gestion</h2>
+
+    <!-- Formulario -->
+    <form (submit)="actualizarGestion($event)" class="space-y-4">
+
+      <!-- Nombre y Apellido -->
+      <div class="flex flex-col sm:flex-row gap-4">
+        <div class="w-full">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+          <input [value]="nombre()" (input)="nombre.set(txtnombre.value)" #txtnombre type="text" name="nombre"
+            class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div class="w-full">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Estado</label>
+          <select (change)="obtenerEstado($event)" name="" id=""
+            class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="">---</option>
+            <option value="activo">Activo</option>
+            <option value="culminado">Culminado</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Carnet y Teléfono -->
+      <div class="flex flex-col sm:flex-row gap-4">
+        <div class="w-full">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Fecha Inicio</label>
+          <input [value]="fecha_inicio()" (change)="fecha_inicio.set(txtfecha_inicio.value)" #txtfecha_inicio
+            type="date" name="carnet"
+            class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div class="w-full">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Fecha Culminacion</label>
+          <input [value]="fecha_culminacion()" (change)="fecha_culminacion.set(txtfecha_culminacion.value)"
+            #txtfecha_culminacion type="date" name="telefono"
+            class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+      </div>
+      <!-- Botón -->
+      <button type="submit"
+        class="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition">
+        Actualizar Docente
+      </button>
+    </form>
+  </div>
+</div>

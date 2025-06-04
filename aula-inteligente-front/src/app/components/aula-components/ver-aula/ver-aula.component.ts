@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { ModalsAulaService } from '../../../services/aula/modals-aula.service';
+import { AulaService } from '../../../services/aula/aula.service';
 
 @Component({
   selector: 'ver-aula',
@@ -9,6 +10,9 @@ import { ModalsAulaService } from '../../../services/aula/modals-aula.service';
 })
 export class VerAulaComponent {
   private modalAulaService = inject(ModalsAulaService);
+  private aulaService = inject(AulaService);
+
+  aula = computed(() => this.aulaService.aulaActual());
 
   cerrarModalVer() {
     this.modalAulaService.cambiarEstadoVer();

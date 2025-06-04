@@ -1,8 +1,9 @@
 <!-- Fondo oscuro -->
-<div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+<div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4">
 
   <!-- Contenedor del modal -->
-  <div class="bg-white w-full max-w-md rounded-xl shadow-lg p-6 sm:p-8 relative animate-fade-in mx-2">
+  <div
+    class="bg-white w-full max-w-2xl rounded-xl shadow-lg p-6 sm:p-8 relative animate-fade-in overflow-y-auto max-h-[90vh]">
 
     <!-- Botón cerrar -->
     <button (click)="cerrarModalEditar()"
@@ -14,121 +15,78 @@
     </button>
 
     <!-- Título -->
-    <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">Editar informacion</h2>
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Editar Docente</h2>
 
     <!-- Formulario -->
-    <form class="space-y-4">
-      <!-- Nombre -->
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Nombre completo</label>
-        <input type="text" placeholder="Ej. Juan Pérez"
-          class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    <form (submit)="actualizarDocente($event)" class="space-y-4">
+
+      <!-- Nombre y Apellido -->
+      <div class="flex flex-col sm:flex-row gap-4">
+        <div class="w-full">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+          <input [value]="nombre()" (input)="nombre.set(txtnombre.value)" #txtnombre type="text" name="nombre"
+            class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div class="w-full">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Apellido</label>
+          <input [value]="apellido()" (input)="apellido.set(txtapellido.value)" #txtapellido type="text" name="apellido"
+            class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
       </div>
 
-      <!-- CI y expedido -->
-      <div class="flex gap-2">
-        <div class="w-2/3">
+      <!-- Carnet y Teléfono -->
+      <div class="flex flex-col sm:flex-row gap-4">
+        <div class="w-full">
           <label class="block text-sm font-medium text-gray-700 mb-1">Cédula de identidad</label>
-          <input type="text" placeholder="12345678"
+          <input [value]="carnet()" (input)="carnet.set(txtcarnet.value)" #txtcarnet type="text" name="carnet"
             class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
         </div>
-        <div class="w-1/3">
-          <label class="block text-sm font-medium text-gray-700 mb-1">Exp.</label>
-          <select class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <option>SC</option>
-            <option>LP</option>
-            <option>CB</option>
-            <option>CH</option>
-            <option>OR</option>
-            <option>PT</option>
-            <option>TJ</option>
-            <option>BN</option>
-            <option>PD</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Email -->
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
-        <input type="email" placeholder="ejemplo@correo.com"
-          class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
-      </div>
-
-      <div class="flex w-full gap-1">
-        <!-- Teléfono -->
-        <div class="w-1/2">
+        <div class="w-full">
           <label class="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
-          <input type="text" placeholder="71234567"
-            class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
-        </div>
-        <!-- Especialidad -->
-        <div class="w-1/2">
-          <label class="block text-sm font-medium text-gray-700 mb-1">Especialidad</label>
-          <input type="text" placeholder="Ej. Matemáticas"
+          <input [value]="telefono()" (input)="telefono.set(txttelefono.value)" #txttelefono type="text" name="telefono"
             class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
         </div>
       </div>
 
-      <div class="flex w-full gap-1">
-        <div class="w-1/2">
+      <!-- Turno y Fecha nacimiento -->
+      <div class="flex flex-col sm:flex-row gap-4">
+        <div class="w-full">
           <label class="block text-sm font-medium text-gray-700 mb-1">Turno</label>
-          <select class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <option>SC</option>
-            <option>LP</option>
-            <option>CB</option>
-            <option>CH</option>
-            <option>OR</option>
-            <option>PT</option>
-            <option>TJ</option>
-            <option>BN</option>
-            <option>PD</option>
+          <select (change)="obtenerTurno($event)" name="" id=""
+            class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="">---</option>
+            <option value="mañana">Mañana</option>
+            <option value="tarde">Tarde</option>
           </select>
         </div>
-        <!-- Fecha nacimiento -->
-        <div class="w-1/2">
+        <div class="w-full">
           <label class="block text-sm font-medium text-gray-700 mb-1">Fecha de nacimiento</label>
-          <input type="date"
+          <input [value]="fecha_nacimiento()" (change)="fecha_nacimiento.set(txtfecha_nacimiento.value)"
+            #txtfecha_nacimiento type="date" name="fecha_nacimiento"
             class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
         </div>
       </div>
 
-      <div class="flex w-full justify-around gap-1">
-        <div class="w-1/2">
-          <label class="block text-sm font-medium text-gray-700 mb-1">Grado</label>
-          <select class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6</option>
-            <option>7</option>
-            <option>1</option>
-            <option>1</option>
-          </select>
+      <!-- Especialidad y Fecha contratación -->
+      <div class="flex flex-col sm:flex-row gap-4">
+        <div class="w-full">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Especialidad</label>
+          <input [value]="especialidad()" (input)="especialidad.set(txtespecialidad.value)" #txtespecialidad type="text"
+            name="especialidad"
+            class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
         </div>
-        <div class="w-1/2">
-          <label class="block text-sm font-medium text-gray-700 mb-1">Nivel</label>
-          <select class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <option>SC</option>
-            <option>LP</option>
-            <option>CB</option>
-            <option>CH</option>
-            <option>OR</option>
-            <option>PT</option>
-            <option>TJ</option>
-            <option>BN</option>
-            <option>PD</option>
-          </select>
+        <div class="w-full">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Fecha de contratación</label>
+          <input [value]="fecha_contratacion()" (change)="fecha_contratacion.set(txtfecha_contratacion.value)"
+            #txtfecha_contratacion type="date" name="fecha_contratacion"
+            class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
         </div>
-
       </div>
 
       <!-- Botón -->
       <button type="submit"
         class="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition">
-        Registrar Profesor
+        Actualizar Docente
       </button>
     </form>
   </div>

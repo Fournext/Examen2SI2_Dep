@@ -1,0 +1,116 @@
+<!-- Fondo oscurecido -->
+<div class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center px-4">
+  <!-- Contenedor del modal -->
+  <div class="bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl shadow-lg p-8 relative">
+
+    <!-- Botón de cierre -->
+    <button (click)="cerrarModal()"
+      class="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white p-2 rounded-[10px]">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <!-- Título -->
+    <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Actualizar Estudiante</h2>
+
+    <form (submit)="editarEstudiante($event)" class="space-y-6">
+
+      <!-- Sección Estudiante -->
+      <div>
+        <h3 class="text-xl font-semibold text-gray-700 mb-4">Datos del Estudiante</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+            <input type="text" [value]="nombre()" (input)="nombre.set($any($event.target).value)"
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Apellido</label>
+            <input type="text" [value]="apellido()" (input)="apellido.set($any($event.target).value)"
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Carnet</label>
+            <input type="text" [value]="carnet_estudiante()" (input)="carnet_estudiante.set($any($event.target).value)"
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Fecha de Nacimiento</label>
+            <input type="date" [value]="fecha_nacimiento()" (change)="fecha_nacimiento.set($any($event.target).value)"
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Dirección</label>
+            <input type="text" [value]="direccion()" (input)="direccion.set($any($event.target).value)"
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">RUDE</label>
+            <input type="text" [value]="rude()" (input)="rude.set($any($event.target).value)"
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección Apoderado -->
+      <div>
+        <h3 class="text-xl font-semibold text-gray-700 mb-4">Datos del Apoderado</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Nombre Apoderado</label>
+            <input type="text" [value]="nombre_apoderado()" (input)="nombre_apoderado.set($any($event.target).value)"
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Apellido Apoderado</label>
+            <input type="text" [value]="apellido_apoderado()"
+              (input)="apellido_apoderado.set($any($event.target).value)"
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Carnet Apoderado</label>
+            <input type="text" [value]="carnet_apoderado()" (input)="carnet_apoderado.set($any($event.target).value)"
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Teléfono Apoderado</label>
+            <input type="text" [value]="telefono_apoderado()"
+              (input)="telefono_apoderado.set($any($event.target).value)"
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Gestión y Nivel -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Gestión</label>
+          <select (change)="obtenerGestion($event)"
+            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="">Seleccione Gestión</option>
+            @for (gestion of listaGestiones(); track gestion) {
+            <option value="{{gestion.id}}">{{gestion.nombre}}</option>
+            }
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Nivel</label>
+          <select (change)="obtenerNivel($event)"
+            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="">Seleccione Nivel</option>
+            @for (nivel of listaNiveles(); track nivel.id) {
+            <option value="{{nivel.id}}">{{nivel.descripcion}}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <!-- Botón -->
+      <button type="submit"
+        class="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition">
+        Actualizar Estudiante
+      </button>
+    </form>
+  </div>
+</div>

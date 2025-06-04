@@ -1,3 +1,4 @@
+import { AulaService } from './../../services/aula/aula.service';
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { AulaItemComponent } from "../../components/aula-components/aula-item/aula-item.component";
 import { ModalsAulaService } from '../../services/aula/modals-aula.service';
@@ -13,10 +14,13 @@ import { VerAulaComponent } from "../../components/aula-components/ver-aula/ver-
 })
 export class AulaPageComponent {
   private modalAulaService = inject(ModalsAulaService);
+  private aulaService = inject(AulaService);
 
   estadoModalAulaEditar = computed(() => this.modalAulaService.obtenerEstadoEditar());
   estadoModalAulaRegistrar = computed(() => this.modalAulaService.obtenerEstadoRegistro());
   estadoModalVer = computed(() => this.modalAulaService.obtenerEstadoVer());
+
+  listaAulas = computed(() => this.aulaService.listaAulas());
 
   mostrarModalRegistrar(): void {
     this.modalAulaService.cambiarEstadoRegistro();
@@ -32,6 +36,10 @@ export class AulaPageComponent {
         console.log('Accion no registrada');
         break;
     }
+  }
+
+  ngOnInit() {
+    this.aulaService.listarAulas();
   }
 
   listaDeNiveles: string[] = ['1ro Basico', '2do Basico', '3ro Basico', '4to Basico', '5to Basico', '6to Basico'];

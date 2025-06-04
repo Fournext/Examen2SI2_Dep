@@ -1,0 +1,12 @@
+<div class="py-1 mb-1 grid bg-[#DFD0B8] text-center md:grid-cols-7 md:max-w-[calc(100vw-240px)] hover:scale-[1.01] ">
+  <span>{{estudiante().id}}</span>
+  <span>{{estudiante().nombre}}</span>
+  <span>{{estudiante().apellido}}</span>
+  <span>{{estudiante().estado}}</span>
+  <span>{{estudiante().nivel_nombre}}</span>
+  <span>{{estudiante().gestion_nombre}}</span>
+  <div class="grid grid-cols-2 gap-1 px-1">
+    <button (click)="mostrarEditar()" class="bg-yellow-500 px-2 py-1 rounded-[4px] hover:bg-yellow-600">Editar</button>
+    <button (click)="mostrarVer()" class="bg-green-500  px-2 py-1 rounded-[4px] hover:bg-green-600">Ver</button>
+  </div>
+</div>
