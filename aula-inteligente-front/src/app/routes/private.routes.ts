@@ -17,7 +17,7 @@ export const privateRoutes: Routes = [
       }, {
         path: 'administrativo',
         canActivate: [roleGuard],
-        data: { roles: ['administrativo'] },
+        data: { roles: ['administrativo', 'docente'] },
         loadComponent: () => import('../pages/administrativos-page/administrativos-page.component').then(matchMedia => matchMedia.AdministrativosPageComponent)
       }, {
         path: 'profesor',
@@ -28,6 +28,15 @@ export const privateRoutes: Routes = [
       }, {
         path: 'materia',
         loadComponent: () => import('../pages/materia-page/materia-page.component').then(m => m.MateriaPageComponent)
+      }, {
+        path: 'nivel',
+        loadComponent: () => import('../pages/nivel-page/nivel-page.component').then(m => m.NivelPageComponent)
+      }, {
+        path: 'gestion',
+        loadComponent: () => import('../pages/gestion-page/gestion-page.component').then(m => m.GestionPageComponent)
+      }, {
+        path: 'estudiante',
+        loadComponent: () => import('../pages/estudiante-page/estudiante-page.component').then(m => m.EstudiantePageComponent)
       }, {
         path: 'private/**',
         redirectTo: '/private/administrativo'

@@ -43,6 +43,7 @@ export class RegisterPageComponent {
     this.registerService.registerUsuario(usuario).subscribe({
       next: (response: any) => {
         this.toastr.success(response.mensaje);
+        console.log(response.usuario);
       },
       error: (e: HttpErrorResponse) => {
         const errorMessage = e.error?.detail || e.error?.message || 'Error al crear el usuario';

@@ -1,11 +1,12 @@
-<div class="py-1 mb-1 grid bg-[#DFD0B8] text-center md:grid-cols-5 md:max-w-[calc(100vw-240px)] hover:scale-[1.01] ">
-  <span>1</span>
-  <span>Ciencias Naturales</span>
-  <span>ZXZXC</span>
-  <span>1ro Basico</span>
+<div class="py-1 mb-1 grid bg-[#DFD0B8] text-center md:grid-cols-6 md:max-w-[calc(100vw-240px)] hover:scale-[1.01] ">
+  <span>{{materia().id}}</span>
+  <span>{{materia().nombre}}</span>
+  <span>{{materia().codigo}}</span>
+  <span>{{materia().nivel_descripcion}}</span>
+  <span>{{materia().estado}}</span>
   <div class="grid grid-cols-2 gap-1 px-1">
     <button (click)="mostrarModalEditar()"
       class="bg-yellow-500 px-2 py-1 rounded-[4px] hover:bg-yellow-600">Editar</button>
-    <button class="bg-green-500  px-2 py-1 rounded-[4px] hover:bg-green-600">Ver</button>
+    <button (click)="mostrarModalVer()" class="bg-green-500  px-2 py-1 rounded-[4px] hover:bg-green-600">Ver</button>
   </div>
 </div>

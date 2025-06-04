@@ -94,7 +94,7 @@ Materia.objects.bulk_create([
 # Crear estudiante
 estudiante = Estudiante.objects.create(
     nombre="Sebastian", apellido="Zeballos", carnet_estudiante="CE1000",
-    fecha_nacimiento="2010-01-01", direccion="Dirección Central",
+    fecha_nacimiento="2010-01-01", direccion="Direccion Central",
     rude="RUDE1000", estado="activo", telefono_apoderado="77777777",
     nombre_apoderado="Padre", apellido_apoderado="Zeballos", carnet_apoderado="CA1000",
     gestion=gestion1, nivel=nivel1, usuario=usuario_alumno

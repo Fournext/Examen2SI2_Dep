@@ -1,5 +1,5 @@
 import { APP_BASE_HREF } from '@angular/common';
-import { AngularNodeAppEngine, CommonEngine, isMainModule, writeResponseToNodeResponse } from '@angular/ssr/node';
+import { CommonEngine, isMainModule } from '@angular/ssr/node';
 import express from 'express';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -10,7 +10,7 @@ const browserDistFolder = resolve(serverDistFolder, '../browser');
 const indexHtml = join(serverDistFolder, 'index.server.html');
 
 const app = express();
-const angularApp = new AngularNodeAppEngine();
+const commonEngine = new CommonEngine();
 
 /**
  * Example Express Rest API endpoints can be defined here.
@@ -27,32 +27,30 @@ const angularApp = new AngularNodeAppEngine();
 /**
  * Serve static files from /browser
  */
-// Configuración crítica para archivos .mjs
-app.use(express.static(browserDistFolder, {
-  maxAge: '1y',
-  index: false,
-  redirect: false,
-  setHeaders: (res, path) => {
-    if (path.endsWith('.mjs')) {
-      res.setHeader('Content-Type', 'application/javascript');
-    }
-    // Opcional: para otros tipos de archivos
-    else if (path.endsWith('.css')) {
-      res.setHeader('Content-Type', 'text/css');
-    }
-  }
-}));
+app.get(
+  '**',
+  express.static(browserDistFolder, {
+    maxAge: '1y',
+    index: 'index.html'
+  }),
+);
 
 /**
  * Handle all other requests by rendering the Angular application.
  */
-app.use('/**', (req, res, next) => {
-  angularApp
-    .handle(req)
-    .then((response) =>
-      response ? writeResponseToNodeResponse(response, res) : next(),
-    )
-    .catch(next);
+app.get('**', (req, res, next) => {
+  const { protocol, originalUrl, baseUrl, headers } = req;
+
+  commonEngine
+    .render({
+      bootstrap,
+      documentFilePath: indexHtml,
+      url: `${protocol}://${headers.host}${originalUrl}`,
+      publicPath: browserDistFolder,
+      providers: [{ provide: APP_BASE_HREF, useValue: baseUrl }],
+    })
+    .then((html) => res.send(html))
+    .catch((err) => next(err));
 });
 
 /**

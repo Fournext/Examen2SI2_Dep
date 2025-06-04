@@ -4,6 +4,9 @@ import { ModalsMateriaService } from '../../services/materia/modals-materia.serv
 import { FormularioEditarComponent } from "../../components/materia-components/formulario-editar/formulario-editar.component";
 import { FormularioRegistrarComponent } from "../../components/materia-components/formulario-registrar/formulario-registrar.component";
 import { VerMateriaComponent } from "../../components/materia-components/ver-materia/ver-materia.component";
+import { MateriaService } from '../../services/materia/materia.service';
+import { ToastrService } from 'ngx-toastr';
+import { NivelService } from '../../services/nivel/nivel.service';
 
 @Component({
   selector: 'materia-page',
@@ -13,16 +16,23 @@ import { VerMateriaComponent } from "../../components/materia-components/ver-mat
 })
 export class MateriaPageComponent {
   private modalMateriaService = inject(ModalsMateriaService);
+  private materiaService = inject(MateriaService);
+  private nivelService = inject(NivelService);
+  private toastr = inject(ToastrService);
 
   estadoModalAulaEditar = computed(() => this.modalMateriaService.obtenerEstadoEditar());
   estadoModalAulaRegistrar = computed(() => this.modalMateriaService.obtenerEstadoRegistro());
   estadoModalVer = computed(() => this.modalMateriaService.obtenerEstadoVer());
 
+
+  listaMateria = computed(() => this.materiaService.listaMateria());
+
+
+
   mostrarModalRegistrar(): void {
     this.modalMateriaService.cambiarEstadoRegistro();
   }
 
-  listaDeNiveles: string[] = ['1ro Basico', '2do Basico', '3ro Basico', '4to Basico', '5to Basico', '6to Basico'];
 
   ejecutarAccion(event: Event): void {
     let value = (event.target as HTMLSelectElement).value;
@@ -34,5 +44,10 @@ export class MateriaPageComponent {
         console.log('Accion no registrada');
         break;
     }
+  }
+
+  ngOnInit() {
+    this.materiaService.listarMateria();
+    this.nivelService.listarNiveles();
   }
 }
