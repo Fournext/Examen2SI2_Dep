@@ -20,16 +20,6 @@ services:
       - backend
       - frontend
 
-  angular-app:
-    build: ./aula-inteligente-front/
-    container_name: angular_frontend
-    ports:
-      - "4000:80"
-    environment:
-      - API_URL=http://web:8000
-    networks:
-      - frontend
-      - backend
 
 networks:
   backend:
