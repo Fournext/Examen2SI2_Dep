@@ -56,7 +56,6 @@ INSTALLED_APPS = [
     'evaluacion',
     'auto_evaluacion',
     'boletin_materia',
-
 ]
 
 MIDDLEWARE = [

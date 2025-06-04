@@ -1,20 +1,32 @@
 # Fase de construcción
-FROM node:18-alpine AS builder
+FROM node:18 AS builder
 WORKDIR /app
+
+# Copiar dependencias
 COPY package.json package-lock.json ./
-RUN npm ci
+
+# Aumentar configuración de red para evitar timeouts
+RUN npm config set fetch-retries 5 \
+  && npm config set fetch-retry-mintimeout 20000 \
+  && npm config set fetch-retry-maxtimeout 120000 \
+  && npm config set timeout 600000 \
+  && npm ci
+
+# Copiar el resto de archivos
 COPY . .
+
+# Build de producción Angular
 RUN npm run build -- --configuration=production
 
-# Fase de producción
-FROM node:18-alpine
+# Fase de producción (más ligera, sin devDependencies)
+FROM node:18-slim
 WORKDIR /app
 
-COPY --from=builder /app/package.json ./
-COPY --from=builder /app/package-lock.json ./
+# Copiar dependencias necesarias
+COPY package.json package-lock.json ./
 RUN npm ci --omit=dev
 
-# Estructura exacta que espera server.ts
+# Copiar la salida del build
 COPY --from=builder /app/dist/my-project/browser ./browser
 COPY --from=builder /app/dist/my-project/server ./server
 

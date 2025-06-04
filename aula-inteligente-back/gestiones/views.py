@@ -34,7 +34,7 @@ def crear_gestion(request):
 
 @api_view(['GET'])
 def obtener_gestion(request):
-    id_gestion = request.query_params('id')
+    id_gestion = request.query_params.get('id')
     try:
         gestion = Gestion.objects.get(  # pylint: disable=no-member
             id=id_gestion)  # pylint: disable=no-member
@@ -51,7 +51,7 @@ def obtener_gestion(request):
 
 @api_view(['PUT'])
 def actualizar_gestion(request):
-    id_gestion = request.query_params('id')
+    id_gestion = request.query_params.get('id')
     try:
         gestion = Gestion.objects.get(  # pylint: disable=no-member
             id=id_gestion)  # pylint: disable=no-member

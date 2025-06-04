@@ -50,31 +50,12 @@ def login(request):
 @api_view(['POST'])
 def register(request):
     """
-    Vista para registrar un nuevo usuario en el sistema.
-
-    Esta vista recibe una solicitud POST con los siguientes datos requeridos:
-    - username: Nombre de usuario único.
-    - password: Contraseña del usuario (será encriptada antes de guardarse).
-    - email: Correo electrónico del usuario.
-    - tipo_usuario: Rol asignado al usuario (por ejemplo, 'admin', 'cliente').
-    - estado: Estado del usuario (por ejemplo, 'activo').
-
-    Verifica si el nombre de usuario ya está registrado. Si no existe, crea un nuevo usuario
-    con los datos proporcionados y devuelve una respuesta de éxito. Si los datos no son válidos
-    o el usuario ya existe, devuelve un error con el estado HTTP correspondiente.
-
-    Args:
-        request (Request): Objeto de solicitud HTTP con los datos del nuevo usuario.
-
-    Returns:
-        Response:
-            - 201 CREATED: Si el usuario fue registrado exitosamente.
-            - 400 BAD REQUEST: Si los datos son inválidos o el usuario ya existe.
+    Vista para registrar un nuevo usuario y devolver sus datos completos.
     """
     serializer = RegisterSerializer(data=request.data)
     if serializer.is_valid():
         data = serializer.validated_data
-        if Usuario.objects.filter(username=data['username']).exists():  # pylint: disable=no-member
+        if Usuario.objects.filter(username=data['username']).exists():
             return Response({'error': 'El usuario ya existe'}, status=status.HTTP_400_BAD_REQUEST)
 
         nuevo_usuario = Usuario(
@@ -86,7 +67,12 @@ def register(request):
         nuevo_usuario.set_password(data['password'])
         nuevo_usuario.save()
 
-        return Response({'mensaje': 'Usuario registrado con exito'}, status=status.HTTP_201_CREATED)
+        usuario_serializado = UsuarioSerializer(nuevo_usuario)
+
+        return Response({
+            'mensaje': 'Usuario registrado con éxito',
+            'usuario': usuario_serializado.data
+        }, status=status.HTTP_201_CREATED)
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

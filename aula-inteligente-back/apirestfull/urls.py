@@ -35,4 +35,5 @@ urlpatterns = [
     path('api/evaluacion/', include('evaluacion.urls')),
     path('api/auto_evaluacion/', include('auto_evaluacion.urls')),
     path('api/boletin_materia/', include('boletin_materia.urls')),
+    path('api/prediccion_id/', include('prediccion_id.urls')),
 ]
