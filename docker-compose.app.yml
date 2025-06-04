@@ -2,8 +2,6 @@ services:
   web:
     build: ./aula-inteligente-back/
     container_name: django_backend
-    command: >
-      python manage.py runserver 0.0.0.0:8000
     environment:
       - POSTGRES_HOST=postgres
       - POSTGRES_DB=DB_aula_parcial_api
@@ -26,7 +24,7 @@ services:
     build: ./aula-inteligente-front/
     container_name: angular_frontend
     ports:
-      - "4000:4000"
+      - "4000:80"
     environment:
       - API_URL=http://web:8000
     networks:

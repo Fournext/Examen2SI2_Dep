@@ -99,7 +99,7 @@ DATABASES = {
         'NAME': 'DB_aula_parcial_api',
         'USER': 'postgres',
         'PASSWORD': '071104',
-        'HOST': 'localhost',
+        'HOST': 'postgres',
         'PORT': '5432'
     }
 }
