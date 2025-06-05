@@ -17,7 +17,7 @@ export const privateRoutes: Routes = [
       }, {
         path: 'administrativo',
         canActivate: [roleGuard],
-        data: { roles: ['administrativo', 'docente'] },
+        data: { roles: ['administrativo'] },
         loadComponent: () => import('../pages/administrativos-page/administrativos-page.component').then(matchMedia => matchMedia.AdministrativosPageComponent)
       }, {
         path: 'profesor',

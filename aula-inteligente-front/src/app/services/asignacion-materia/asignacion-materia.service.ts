@@ -39,9 +39,10 @@ export class AsignacionMateriaService {
   listarAsignacionesMateria() {
     this.http.get<any>(`${this.apiUrl}${this.complementoUrl}listar/`).subscribe(
       (response: any) => {
+        console.log('Asignaciones recibidas:', response);
         this.listaAsignacionMateria.set(response.data);
       }
-    )
+    );
   }
 
   actualizarAsignaciones(asignacion: AsignacionMateriaRegister, id: number) {

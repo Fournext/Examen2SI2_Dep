@@ -5,6 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import { UsuarioLogin } from '../../../interfaces/user.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../../../services/usuario/auth.service';
+import { jwtDecode } from 'jwt-decode';
+import { TokenPayload } from '../../../interfaces/token.interface';
 
 @Component({
   selector: 'login-page',
@@ -34,11 +36,20 @@ export class LoginPageComponent {
     this.loginService.login(usuario).subscribe({
       next: (response: any) => {
         const token = response.token;
+        const tokenDecode = jwtDecode<TokenPayload>(token);
         if (token) {
+          this.authService.tokenActual.set(token);
           this.authService.saveToken(token);
-          this.router.navigate(['/private']);
-          this.toastr.success("!Bienvenido!", "Exitoso");
-          console.log('entro');
+          if (tokenDecode.role == 'administrativo') {
+            this.router.navigate(['/private']);
+            this.toastr.success("!Bienvenido!", "Exitoso");
+            console.log('entro');
+          } else if (tokenDecode.role == 'docente') {
+            this.router.navigate(['/private-docente']);
+            this.toastr.success("!Bienvenido!", "Exitoso");
+            console.log('entro');
+          }
+
         } else {
           this.toastr.error("No se recibió el token", "Error");
         }

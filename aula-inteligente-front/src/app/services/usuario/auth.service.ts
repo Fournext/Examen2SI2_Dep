@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { TokenPayload } from '../../interfaces/token.interface';
@@ -13,6 +13,9 @@ export class AuthService {
   private toastr = inject(ToastrService);
   private tokenCheckInterval = 60000; // 1 minuto
   private intervalId: any;
+
+  tokenActual = signal<string>('');
+
 
   constructor() {
     this.startTokenWatcher();

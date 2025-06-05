@@ -1,0 +1,28 @@
+<div
+  class="w-[250px] h-[300px] bg-white border-2 rounded-lg shadow-lg overflow-hidden box-border p-2 hover:scale-[1.05]">
+  <!-- Imagen de perfil -->
+  <div class="bg-[url(assets/perfil.jpg)] bg-cover bg-center h-[60%] w-full rounded-[5px]"></div>
+
+  <!-- Información -->
+  <div class="p-4 text-center">
+    <span class="block font-semibold text-gray-700">{{estudiante().nombre}}{{estudiante().apellido}}</span>
+    <span class="block text-gray-500">{{estudiante().carnet_estudiante}}</span>
+  </div>
+
+  <!-- Botones -->
+  <div class="flex justify-around px-4 mt-auto gap-1">
+    <button (click)="verModalRegistro()"
+      class="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 w-[50%]">Asistencia</button>
+    <button (click)="verModalRegistroParticipacion()"
+      class="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600 w-[50%]">Participacion</button>
+  </div>
+
+</div>
+@if(mostrarModal()){
+<app-modal-asistencia />
+}
+
+@if(mostrarModalParticipacion()){
+<app-participacion-estudiante />
+
+}

@@ -1,0 +1,113 @@
+<style>
+  main,
+  body {
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE y Edge */
+    overflow: auto;
+  }
+
+  div::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari */
+  }
+</style>
+<div class="flex flex-col gap-3 h-full md:max-w-[calc(100vw-240px)] justify-center ">
+  <div class="md:flex md:justify-around  md:max-w-[calc(100vw-240px)] bg-gray-800 px-6 py-4 rounded-lg ">
+    <button class="w-[20%] border-2 bg-white rounded-lg">
+      Actualizar
+    </button>
+  </div>
+  <!-- Contenido -->
+  <div class="relative w-full h-full rounded-lg overflow-hidden">
+    <!-- Difuminado superior -->
+    <div
+      class="pointer-events-none absolute top-0 left-0 w-full h-6 bg-gradient-to-b from-gray-800 to-transparent z-10">
+    </div>
+
+    <!-- Difuminado inferior -->
+    <div
+      class="pointer-events-none absolute bottom-0 left-0 w-full h-6 bg-gradient-to-t from-gray-800 to-transparent z-10">
+    </div>
+
+    <!-- Contenido scrollable -->
+    <!-- Contenido scrollable -->
+    <main class="overflow-y-scroll h-full bg-gray-800 p-6">
+      <div class="flex flex-col md:flex-row gap-6 w-full">
+
+        <!-- Gráfico de Pastel -->
+        <div class="bg-white p-6 rounded-xl shadow-md w-full md:w-1/2">
+          <h2 class="text-xl text-blue-600 font-semibold text-center mb-4">RENDIMIENTO GENERAL DE LAS MATERIAS ORIENTADA
+            A LA
+            INGENIERIA</h2>
+          <div class="relative w-60 h-60 rounded-full mx-auto">
+            <!-- Física (azul) -->
+            <div class="absolute w-full h-full rounded-full bg-blue-500"
+              style="clip-path: polygon(50% 50%, 100% 0%, 100% 80%, 70% 100%); transform: rotate(0deg);">
+            </div>
+            <!-- Química (verde) -->
+            <div class="absolute w-full h-full rounded-full bg-green-400"
+              style="clip-path: polygon(50% 50%, 70% 100%, 20% 100%, 0% 70%); transform: rotate(90deg);">
+            </div>
+            <!-- Matemáticas (rojo) -->
+            <div class="absolute w-full h-full rounded-full bg-red-400"
+              style="clip-path: polygon(50% 50%, 0% 70%, 0% 0%, 100% 0%); transform: rotate(180deg);">
+            </div>
+            <!-- Centro -->
+            <div
+              class="absolute w-24 h-24 rounded-full bg-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+            </div>
+          </div>
+
+          <!-- Leyenda -->
+          <div class="mt-6 flex flex-col items-center gap-2 text-sm">
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-4 bg-blue-500 rounded-sm"></div>
+              <span class="text-gray-700">Física – estudiantes buenos</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-4 bg-green-400 rounded-sm"></div>
+              <span class="text-gray-700">Química – estudiantes buenos</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-4 bg-red-400 rounded-sm"></div>
+              <span class="text-gray-700">Matemáticas – estudiantes buenos</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gráfico de Barras -->
+        <div class="bg-white p-6 rounded-xl shadow-md w-full md:w-1/2">
+          <h2 class="text-xl font-semibold text-center mb-6 text-blue-700">NOTAS PROMEDIO EN GENERAL</h2>
+          <div class="flex justify-around items-end gap-4 h-64">
+            <div class="flex flex-col items-center h-full justify-end">
+              <span class="text-sm font-bold mb-1">20</span>
+              <div class="w-10 bg-blue-500 rounded-t-md" style="height: 20%;"></div>
+              <span class="text-xs mt-2 text-gray-600">100-90</span>
+            </div>
+            <div class="flex flex-col items-center h-full justify-end">
+              <span class="text-sm font-bold mb-1">50</span>
+              <div class="w-10 bg-blue-500 rounded-t-md" style="height: 50%;"></div>
+              <span class="text-xs mt-2 text-gray-600">80-70</span>
+            </div>
+            <div class="flex flex-col items-center h-full justify-end">
+              <span class="text-sm font-bold mb-1">35</span>
+              <div class="w-10 bg-blue-500 rounded-t-md" style="height: 35%;"></div>
+              <span class="text-xs mt-2 text-gray-600">70-60</span>
+            </div>
+            <div class="flex flex-col items-center h-full justify-end">
+              <span class="text-sm font-bold mb-1">70</span>
+              <div class="w-10 bg-blue-500 rounded-t-md" style="height: 70%;"></div>
+              <span class="text-xs mt-2 text-gray-600">60-40</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+
+</div>
