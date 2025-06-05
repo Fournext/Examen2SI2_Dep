@@ -21,7 +21,7 @@ export class RegisterPageComponent {
   password = signal<string>('');
   email = signal<string>('');
   tipoUsuario = signal<string>('');
-  estado = 'Activo';
+  estado = 'activo';
 
 
   obtenerTipoDeUsuario(event: Event) {

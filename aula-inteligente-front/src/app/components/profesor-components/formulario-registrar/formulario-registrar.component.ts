@@ -34,7 +34,7 @@ export class FormularioRegistrarComponent {
   password = signal<string>('');
   email = signal<string>('');
   tipoUsuario = signal<string>('docente');
-  estado = 'Activo';
+  estado = 'activo';
 
   registrarUsuario(event: Event) {
     event.preventDefault();

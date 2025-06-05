@@ -12,6 +12,7 @@ export class LoginService {
   private complements = 'api/usuario/';
   private http = inject(HttpClient);
 
+
   login(usuario: UsuarioLogin): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}${this.complements}login/`, usuario);
   }

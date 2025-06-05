@@ -98,7 +98,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'DB_aula_parcial_api',
         'USER': 'postgres',
-        'PASSWORD': '071104',
+        'PASSWORD': '6305913',
         'HOST': 'localhost',
         'PORT': '5432'
     }

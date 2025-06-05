@@ -1,0 +1,46 @@
+<!-- Fondo oscuro del modal -->
+<div class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
+  <!-- Contenedor del modal -->
+  <div class="bg-white rounded-2xl shadow-lg w-full max-w-6xl max-h-[90vh] overflow-y-auto relative p-6">
+    <!-- Botón cerrar -->
+    <button (click)="cerrarModal()"
+      class="absolute top-3 right-3 bg-red-500 hover:bg-red-600 text-white w-8 h-8 rounded-[10px] flex items-center justify-center">
+      ✕
+    </button>
+
+    <h2 class="text-2xl font-bold text-center mb-6">Lista de Tareas</h2>
+
+    <!-- Tabla de tareas -->
+    <div class="overflow-x-auto">
+      <table class="min-w-full table-auto border border-gray-300">
+        <thead class="bg-gray-200 text-gray-700">
+          <tr>
+            <th class="px-4 py-2">ID</th>
+            <th class="px-4 py-2">Fecha</th>
+            <th class="px-4 py-2">Tipo</th>
+            <th class="px-4 py-2">Descripción</th>
+            <th class="px-4 py-2">Nota</th>
+            <th class="px-4 py-2">Trimestre</th>
+            <th class="px-4 py-2">Materia</th>
+            <th class="px-4 py-2">Estudiante</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (tareas of listaTareas(); track tareas.id) {
+          <tr class="hover:bg-gray-100">
+            <td class="border px-4 py-2">{{tareas.id}}</td>
+            <td class="border px-4 py-2">{{tareas.fecha}}</td>
+            <td class="border px-4 py-2">{{tareas.tipo}}</td>
+            <td class="border px-4 py-2">{{tareas.descripcion}}</td>
+            <td class="border px-4 py-2">{{tareas.nota}}</td>
+            <td class="border px-4 py-2">{{tareas.trimestre_nombre}}</td>
+            <td class="border px-4 py-2">{{tareas.materia}}</td>
+            <td class="border px-4 py-2">{{tareas.estudiante_nombre}}{{tareas.estudiante_apellido}}</td>
+          </tr>
+          }
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
