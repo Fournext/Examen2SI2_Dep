@@ -14,10 +14,22 @@ services:
       - "8000:8000"
     stdin_open: true
     tty: true
+    depends_on:
+      - angular-app
     networks:
       - backend
       - frontend
 
+  angular-app:
+    build: ./aula-inteligente-front/
+    container_name: angular_frontend
+    ports:
+      - "4000:4000"
+    environment:
+      - API_URL=http://web:8000
+    networks:
+      - frontend
+      - backend
 
 networks:
   backend:
